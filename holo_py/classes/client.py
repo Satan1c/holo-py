@@ -1,20 +1,21 @@
 import asyncio
-import aiohttp
 import json
 import re
 
+import aiohttp
 
-class HoloResponse:
-    def __init__(self, data: dict):
-        self.url: str = data.get("url", None)
+from holo_py.types import HoloResponse
 
 
 class HoloClient:
+    _base_url = "http://discord-holo-api.ml/api/"
+    _loop = None
+
     def __init__(self, loop: asyncio.AbstractEventLoop):
         self._loop = loop
-        self._base_url = "http://discord-holo-api.ml/api/"
 
-    async def get_emote(self, tag: str) -> HoloResponse:
+    @classmethod
+    async def get_emote(cls, tag: str) -> HoloResponse:
         """
         Get's an emotion from API - http://discord-holo-api.ml/api/
 
@@ -28,8 +29,8 @@ class HoloClient:
         if not tag or len(tag) < 3:
             raise ValueError("tag length must be more or equal 3" if tag else "you must specify a tag")
 
-        async with aiohttp.ClientSession(loop=self._loop) as session:
-            resp = await session.get(self._base_url + tag)
+        async with aiohttp.ClientSession(loop=cls._loop) as session:
+            resp = await session.get(cls._base_url + tag)
 
             try:
                 data = await resp.json()
