@@ -1,1 +1,1 @@
-from HoloResponse import *
+from .HoloResponse import *

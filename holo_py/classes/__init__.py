@@ -1,1 +1,1 @@
-from client import HoloClient
+from .client import *
