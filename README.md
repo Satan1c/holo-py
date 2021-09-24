@@ -22,7 +22,7 @@ async def on_ready():
 @bot.event
 async def on_message(message: Message):
     if not message.author.bot:
-        resp = await holo.get_emote(message.content if len(message.content) >= 3 else "kiss")
+        resp = await holo.get_emote(message.content)
 
         embed = Embed()
         embed.set_image(url=resp.url)
