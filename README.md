@@ -29,5 +29,5 @@ async def on_message(message: Message):
 
         await message.channel.send(embed=embed)
 
-bot.run("NjQxNjU5OTkzODg3ODY2ODkw.XcLmcA.G8rIz_HCwo3DxHTXsmttbtdGc0w")
+bot.run("discord-bot token")
 ```
